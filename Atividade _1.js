@@ -12,10 +12,10 @@ if(perg1=="s"||perg1=="S"){
         let perg3=parseFloat(prompt("Me conta ai, o salário é de quantos ? "))
             if(perg3>=3000){
             console.log(`\nIncrivel !! Atingimos nosso objetivo ${nome} já dá pra pagar a Provi e ainda sobra muito pra ser feliz !`)
-            console.log(`\nMeu Script está acabando ${nome} preciso ir, volte aqui mais vezes para crescer meu código e me contar mais novidades, tchau !\n`)
+            console.log(`\nMeu Script está acabando ${nome} preciso ir, não se esqueça de mim, volte aqui mais vezes para crescer meu código e me contar mais novidades, tchau !\n`)
             }else{
         console.log("\nNão se preocupe com valores agora, logo você estará no topo. \n")
-        console.log(`Meu Script está acabando ${nome} preciso ir, volte aqui mais vezes para me contar as novidades, tchau !`)
+        console.log(`Meu Script está acabando ${nome} preciso ir, não se esqueça de mim, volte aqui mais vezes para me contar as novidades, tchau !`)
             }
         }else{
         console.log("\nNão se preocupe, logo chegará a sua vez de brilhar. \n")
@@ -23,5 +23,5 @@ if(perg1=="s"||perg1=="S"){
         }    
     }else{
     console.log("\nNunca desista dos seus objetivos, acredito no seu Potencial !\n")
-    console.log(`Meu Script está acabando ${nome} preciso ir, volte aqui mais vezes para me contar as novidades, tchau !`)
+    console.log(`Meu Script está acabando ${nome} preciso ir, não se esqueça de mim, volte aqui mais vezes para me contar as novidades, tchau !`)
     }
