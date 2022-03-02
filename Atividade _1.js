@@ -4,12 +4,12 @@ const inicio = 2022
 const data = new Date();
 let ano = data.getFullYear();
 let tempo = ano-inicio;
-console.log("Diga seu nome pequeno aprendiz... ")
+console.log("\nDiga seu nome pequeno aprendiz... ")
 let nome = prompt()
 
 if(ano-inicio===0){
 	console.log(`\nParabéns ${nome}, foi esse ano que você se tornou um Bluemer, "O primeiro programa a gente nunca esquece!"\n `)
-}else{ console.log(`\nParabéns ${nome} faz ${tempo} que você é um Bluemer, "O primeiro programa a gente nunca esquece!"\n `) }
+}else{ console.log(`\nParabéns ${nome} faz ${tempo} ano(s) que você é um Bluemer, "O primeiro programa a gente nunca esquece!"\n `) }
 console.log("Mas e ai como anda as coisas já se formou ? [s/n] ")
 let perg1=prompt()
 if(perg1=="s"||perg1=="S"){
