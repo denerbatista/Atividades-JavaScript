@@ -33,7 +33,6 @@ do{
     }
     console.clear()
     console.log(figlet.textSync(`HERÓI NIVEL ${nivel}`, {font: 'Standard',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}));
-
     console.log(`${result[nivel]} você pagou ${nivel} contas.\n`)
     loop=prompt('Digite "l" para listar todas as suas respostas, "r" para reiniciar ou qualquer tecla para finalizar: ').toLowerCase()
     while(loop=='l'){
