@@ -9,7 +9,7 @@ do{
     console.log(figlet.textSync('Jornada Do Herói', {font: 'Standard',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}));
     const nome=prompt("Digite seu nome Herói: ")
     const pergs=[`Primeiramente seja grato e fiél, separou seu dizimo e oferta ${nome}? `,`Pagou água e luz ${nome}?, você precisa de água e energia, principalmente pra um banho quente antes do rolê. `,`Diga com sinceridade ${nome} pagou IPTU desse ano? `,`Não gaste tudo com besteiras ${nome}, você separou a grana do mercado? `,`E o cartão de crédito ${nome}, você sabe a facada que são os juros, pagou ? `]
-    const result=[`Vish desse jeito ${nome}, você não pode botar a cara na rua acerta isso pra ficar de boa,`,`Isso ainda é pouco,tem que agilizar isso ${nome}, seja mais responsável,`,`Isso ainda é pouco,tem que agilizar isso ${nome}, seja mais responsável,`,`Não está totalmente ruim você fez o mínimo esperado ${nome},`,`Vamos lá não perde o pique, só falta mais uma, não deixe pra depois ${nome},`,`Exelente ${nome}, você mais que meresse essa Pizza não perca tempo e corra pra recompensa, \nsó não gaste tudo, guarde um pouquinho para o próximo fim de semana,`]
+    const result=[`Vish desse jeito ${nome} você não pode botar a cara na rua, acerta isso pra ficar de boa,`,`Isso ainda é pouco,tem que agilizar isso ${nome}, seja mais responsável,`,`Isso ainda é pouco,tem que agilizar isso ${nome}, seja mais responsável,`,`Não está totalmente ruim você fez o mínimo esperado ${nome},`,`Vamos lá não perde o pique, só falta mais uma, não deixe pra depois ${nome},`,`Exelente ${nome}, você mais que meresse essa Pizza não perca tempo e corra pra recompensa, \nsó não gaste tudo, guarde um pouquinho para o próximo fim de semana,`]
     console.clear()
     console.log(`Grande ${nome}! Vamos conferir se todas as contas do mês foram pagas, para ir na pizzaria com a conciência limpa? \nDigite 'sim' ou 'nao':\n`)
     for(i=0,nivel=0;i<pergs.length;i++){
@@ -32,7 +32,7 @@ do{
         }
     }
     console.clear()
-    console.log(figlet.textSync(`HERÓI NIVEL ${nivel}`, {font: 'Standard',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}));
+    console.log(figlet.textSync(`HERÓI NÍVEL ${nivel}`, {font: 'Standard',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}));
     console.log(`${result[nivel]} você pagou ${nivel} contas.\n`)
     loop=prompt('Digite "l" para listar todas as suas respostas, "r" para reiniciar ou qualquer tecla para finalizar: ').toLowerCase()
     while(loop=='l'){
