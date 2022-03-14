@@ -37,6 +37,7 @@ do{
     loop=prompt('Digite "l" para listar todas as suas respostas, "r" para reiniciar ou qualquer tecla para finalizar: ').toLowerCase()
     while(loop=='l'){
         console.clear()
+        console.log(figlet.textSync(`HERÓI NIVEL ${nivel}`, {font: 'Standard',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}));
         console.log(`${result[nivel]} você pagou ${nivel} contas.\n\n${pergs[0]}\nResposta: ${respS[0]}\n\n${pergs[1]}\nResposta: ${respS[1]}\n\n${pergs[2]}\nResposta: ${respS[2]}\n\n${pergs[3]}\nResposta: ${respS[3]}\n\n${pergs[4]}\nResposta: ${respS[4]}\n\n`)
         loop=prompt('Digite r para reiniciar ou qualquer tecla para finalizar: ').toLowerCase()
     }
