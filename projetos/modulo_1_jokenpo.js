@@ -55,7 +55,7 @@ do{
             i--
             console.log(figlet.textSync('ERRO', {font: 'ghost',horizontalLayout: 'default',verticalLayout: 'default',width: 90,whitespaceBreak: false}).red)
             console.log(`${user} é uma alternativa invalida escolha 1, 2 ou 3\n`)
-            prompt('Digite qualquer tecla para tentar novamene: ')
+            prompt('Digite qualquer tecla para tentar novamente: ')
         }
     }      
     console.clear()
