@@ -56,7 +56,7 @@ do{
             choice[2].push('- EMPATOU'); //Armazena resultado de empate na rodada.
             console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).yellow); //Gera Desenho com as jogadas do usuário e computador na cor amarelo.
             console.log(`Você e o computador escolheram ${options[0][user-1]} - Empate ninguém marcou ponto na rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`)
-            prompt('Digite qualquer tecla para continuar: ');
+            prompt(`Restam ${rounds-i-1} rodadas digite qualquer tecla para continuar: `);
             console.clear();
         }else if((user==1&&computer==2)||(user==2&&computer==3)||(user==3&&computer==1)){ //Todas as condições de derrota do usuário.
             console.clear();
@@ -64,7 +64,7 @@ do{
             choice[2].push('- Computador GANHOU'); //Armazena resultado de ganho do computador na rodada.
             console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).red); //Gera Desenho com as jogadas do usuário e computador na cor vermeho.
             console.log(`"${options[0][computer-1]} ${options[1][computer-1]} ${options[0][user-1]}" - Você perdeu a rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`); // Forma frase de ação da jogada de acordo com a escolha do computador e usuário, informa ao usuario que que ele perdeu a rodada e mostra o placar parcial. 
-            prompt('Digite qualquer tecla para continuar: ');
+            prompt(`Restam ${rounds-i-1} rodadas digite qualquer tecla para continuar: `);
             console.clear();
         }else if((user==2&&computer==1)||(user==1&&computer==3||(user==3&&computer==2))){ //Todas as condições de vitória do usuário.
             console.clear();
@@ -72,7 +72,7 @@ do{
             choice[2].push(`- ${name} GANHOU`); //Armazena resultado de ganho do usuário na rodada.
             console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).green); //Gera Desenho com as jogadas do usuário e computador na cor verde.
             console.log(`"${options[0][user-1]} ${options[1][user-1]} ${options[0][computer-1]}" - Você ganhou a rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`); // Forma frase de ação da jogada de acordo com a escolha do computador e usuário, informa ao usuario que que ele ganhou a rodada e mostra o placar parcial. 
-            prompt('Digite qualquer tecla para continuar: ');
+            prompt(`Restam ${rounds-i-1} rodadas digite qualquer tecla para continuar: `);
             console.clear();
         }else{ //Condição para escolha invalida do usuário.
             console.clear();
