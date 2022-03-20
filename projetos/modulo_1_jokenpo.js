@@ -4,16 +4,15 @@ const figlet=require('figlet');
 const colors=require('colors');
 
 //Função de criação de Arte
-function design(text,font,size){   
+function design(text,font,width){   
     return figlet.textSync(text, {
         font: font,
         horizontalLayout: 'default',
         verticalLayout: 'default',
-        width: size,
+        width: width,
         whitespaceBreak: false
     });
 }
-
 do{
     //Definição de nome de usuário.
     console.clear();
@@ -32,11 +31,11 @@ do{
     }
 
     //Armazenamento de jogadas e placar.
-    let score=[0,0]; //score[0] armazena vitórias do computador, score[1] armazena vitórias do usuário.
+    let score=[0,0,0]; //score[0] armazena vitórias do computador, score[1] armazena vitórias do usuário, score[2] armazena empates
     let choice=[[],[],[]]; //choice[0] armazena jogadas do computador, choice[1] armazena jogadas do usuário, choice[2] armazena resultado da rodada.
 
     //Dados de opções de jogadas e ação de cada uma.
-    const options=[['PEDRA','PAPEL','TESOURA'],['ESMAGA','EMBRULHA','CORTA']];
+    const options=[['PEDRA','PAPEL','TESOURA'],['ESMAGA','EMBRULHA','CORTA'],['DERROTA','VITÓRIA','EMPATE']];
 
     //Loop de rodadas de acordo com a quantidade escolhida.
     for(var i=0;i<rounds;i++){
@@ -51,30 +50,28 @@ do{
         let user=prompt('R: '); //jogada do usuário.
         choice[1].push(user-1); //Armazena a jogada do usuário convertendo 1,2 e 3 para 0,1 e 2.
 
+        //Função de resultado: mostra resultado da rodada, soma ao score do ganhador, mostra placar parcial, pergunta se deseja cancelar rodadas. 
+        function result(a,b,c,d){//a score de quem recebe a pontuação: 0 computador, 1 usuario, 2 empate; b resultado: 0 derrota, 1 vitória, 2 empate; c quem ganha: computer, user, para empate qualquer um serve; d quem perde: inverso de c.
+            score[a]++; //Armazena resultado no placar do vencedor ou no de empate.
+            choice[2].push(`- ${options[2][b]}`); //Armazena resultado da rodada.
+            console.log(`"${options[0][c-1]} ${options[1][c-1]} ${options[0][d-1]}" - ${options[2][b]} na rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`)
+            stop=prompt(`Restam ${rounds-i-1} rodadas digite "pare" para finalizar agora ou enter para continuar: `).toLocaleLowerCase();
+            console.clear();         
+        }
+
         //Verificação de empate, derrota, vitória e opção inválida ou parar antes de terminar as rodadas.
-        if(user==computer){ //Condição de empate.
+        if((user==1&&computer==2)||(user==2&&computer==3)||(user==3&&computer==1)){ //Todas as condições de derrota do usuário.
             console.clear();
-            choice[2].push('- EMPATOU'); //Armazena resultado de empate na rodada.
-            console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).yellow); //Gera Desenho com as jogadas do usuário e computador na cor amarelo.
-            console.log(`Você e o computador escolheram ${options[0][user-1]} - Empate ninguém marcou ponto na rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`)
-            stop=prompt(`Restam ${rounds-i-1} rodadas digite "pare" para finalizar agora ou enter para continuar: `);
-            console.clear();
-        }else if((user==1&&computer==2)||(user==2&&computer==3)||(user==3&&computer==1)){ //Todas as condições de derrota do usuário.
-            console.clear();
-            score[0]++; //Armazena vitória para o computador no placar.
-            choice[2].push('- Computador GANHOU'); //Armazena resultado de ganho do computador na rodada.
-            console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).red); //Gera Desenho com as jogadas do usuário e computador na cor vermeho.
-            console.log(`"${options[0][computer-1]} ${options[1][computer-1]} ${options[0][user-1]}" - Você perdeu a rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`); // Forma frase de ação da jogada de acordo com a escolha do computador e usuário, informa ao usuario que que ele perdeu a rodada e mostra o placar parcial. 
-            stop=prompt(`Restam ${rounds-i-1} rodadas digite "pare" para finalizar agora ou enter para continuar: `);
-            console.clear();
+            console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).red); //Gera Desenho com as jogadas do usuário e computador na cor vermelho.
+            result(0,0,computer,user)
         }else if((user==2&&computer==1)||(user==1&&computer==3||(user==3&&computer==2))){ //Todas as condições de vitória do usuário.
             console.clear();
-            score[1]++; //Armazena vitória para o usuário no placar.
-            choice[2].push(`- ${name} GANHOU`); //Armazena resultado de ganho do usuário na rodada.
             console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).green); //Gera Desenho com as jogadas do usuário e computador na cor verde.
-            console.log(`"${options[0][user-1]} ${options[1][user-1]} ${options[0][computer-1]}" - Você ganhou a rodada ${i+1} - Placar: Computador ${score[0]} X ${score[1]} ${name}\n`); // Forma frase de ação da jogada de acordo com a escolha do computador e usuário, informa ao usuario que que ele ganhou a rodada e mostra o placar parcial. 
-            stop=prompt(`Restam ${rounds-i-1} rodadas digite "pare" para finalizar agora ou enter para continuar: `);
+            result(1,1,user,computer)
+        }else if(user==computer){ //Condição de empate.
             console.clear();
+            console.log(design(`${options[0][user-1]}  X  ${options[0][computer-1]}`,'Standard',105).yellow); //Gera Desenho com as jogadas do usuário e computador na cor amarelo.
+            result(2,2,computer,user)
         }else{ //Condição para escolha invalida do usuário.
             console.clear();
             choice[0].length=i; //Apaga jogada do computador armazenada
@@ -84,7 +81,7 @@ do{
             console.log(`Sua escolha ${user} é uma alternativa invalida escolha 1, 2 ou 3\n`); //Retorna a resposta do usuário e informa quais as opções possiveis.
             prompt('Tecle ENTER para tentar novamente: ');
         }
-        if(stop.toLocaleLowerCase()=="pare"){ //Condição para anular o restande das rodadas.
+        if(stop=="pare"){ //Condição para anular o restande das rodadas.
             break;
         }
     } 
@@ -93,13 +90,13 @@ do{
     console.clear();
     if(score[0]>score[1]){
         console.log(design('PERDEDOR','Big Money-ne',90).red); //Gera desenho com palavra Perdedor com fonte Big Money-ne na cor vermelha.
-        console.log(`Infelizmente você perdeu para o computador placar final: Computador  ${score[0]} X ${score[1]} ${name}\n`);
+        console.log(`Infelizmente você perdeu para o computador - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
     }else if(score[0]<score[1]){
         console.log(design('VENCEDOR','Big Money-ne',90).green); //Gera desenho com palavra Vencedor com fonte Big Money-ne na cor verde.
-        console.log(`Parabéns você ganhou do computador placar final: Computador  ${score[0]} X ${score[1]} ${name}\n`);
+        console.log(`Parabéns você ganhou do computador - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
     }else{
         console.log(design('EMPATE','Big Money-ne',90).yellow); //Gera desenho com palavra Empate com fonte Big Money-ne na cor amarela.
-        console.log(`Você e o computador empataram placar final: Computador  ${score[0]} X ${score[1]} ${name}\n`);
+        console.log(`Você e o computador empataram - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
     }
 
     //Pergunta ao usúario se deseja reniciar e/ou verificar lista de rodadas.
@@ -107,7 +104,7 @@ do{
     console.clear();
     if(loop=='l'){ //Condição para verificar a lista de rodadas.
         console.log(design('Jokempô','Speed',90).blue); //Gera desenho com o nome do jogo com fonte speed na cor azul.
-        for(j in choice[0]){
+        for(let j in choice[0]){
             console.log(`\nRodada ${Number(j)+1} - Computador ${options[0][choice[0][j]]} X ${options[0][choice[1][j]]} ${name} ${choice[2][j]}\n`); //Gera resumo de todas as rodadas jogadas.     
         }
         if(stop=="pare"){
