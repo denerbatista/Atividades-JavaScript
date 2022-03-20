@@ -3,6 +3,8 @@ const prompt=require('prompt-sync')();
 const figlet=require('figlet');
 const colors=require('colors');
 
+let loop;
+
 //Função de criação de Arte
 function design(text,font,width){   
     return figlet.textSync(text, {
@@ -22,7 +24,7 @@ do{
     console.clear();
     console.log(design('Jokempô','Speed',90).blue); //Gera desenho com o nome do jogo com fonte speed na cor azul.
     let rounds=+prompt(`Defina quantos Rodadas deseja jogar ${name}: `); //Variavel que armazena a quantidade de rodadas.
-    var stop; //Variavel de cancelamento de rodadas restantes.
+    let stop; //Variavel de cancelamento de rodadas restantes.
     console.clear();
     while(rounds<=0||isNaN(rounds)){ 
         console.clear();
@@ -34,7 +36,7 @@ do{
     let score=[0,0,0]; //score[0] armazena vitórias do computador, score[1] armazena vitórias do usuário, score[2] armazena empates
     let choice=[[],[],[]]; //choice[0] armazena jogadas do computador, choice[1] armazena jogadas do usuário, choice[2] armazena resultado da rodada.
 
-    //Dados de opções de jogadas e ação de cada uma.
+    //Dados de opções de jogadas, ação e resultados.
     const options=[['PEDRA','PAPEL','TESOURA'],['ESMAGA','EMBRULHA','CORTA'],['DERROTA','VITÓRIA','EMPATE']];
 
     //Loop de rodadas de acordo com a quantidade escolhida.
@@ -85,31 +87,37 @@ do{
             break;
         }
     } 
-    
-    //Placar Final
-    console.clear();
-    if(score[0]>score[1]){
+    //Função para gerar o placar final.
+    function finalScore(){
+        console.clear();
+        if(score[0]>score[1]){ //Condição que verifica se o usuário perdeu.
         console.log(design('PERDEDOR','Big Money-ne',90).red); //Gera desenho com palavra Perdedor com fonte Big Money-ne na cor vermelha.
         console.log(`Infelizmente você perdeu para o computador - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
-    }else if(score[0]<score[1]){
+        }else if(score[0]<score[1]){ //Condição que verifica se o usuário ganhou.
         console.log(design('VENCEDOR','Big Money-ne',90).green); //Gera desenho com palavra Vencedor com fonte Big Money-ne na cor verde.
         console.log(`Parabéns você ganhou do computador - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
-    }else{
+        }else{ //Condição que verifica que houve empate.
         console.log(design('EMPATE','Big Money-ne',90).yellow); //Gera desenho com palavra Empate com fonte Big Money-ne na cor amarela.
         console.log(`Você e o computador empataram - Placar final: Computador  ${score[0]} X ${score[1]} ${name} - ${score[2]} empates\n`);
+        }
+        loop=prompt("Digite 'R' para jogar novamente, 'L' para lista de jogadas ou qualquer tecla para terminar: ").toLowerCase(); //Variavel de escolha de reiniciar ou verificar rodadas.
+        console.clear();
     }
+    
+    finalScore(); //Exibe o placar final, e pergunta se deseja ver lista de jogadas ou reiniciar.
 
-    //Pergunta ao usúario se deseja reniciar e/ou verificar lista de rodadas.
-    var loop=prompt("Digite 'R' para jogar novamente, 'L' para lista de jogadas ou qualquer tecla para terminar: ").toLowerCase(); //Variavel de escolha de reiniciar ou verificar rodadas.
-    console.clear();
-    if(loop=='l'){ //Condição para verificar a lista de rodadas.
+    //Pergunta ao usuário se deseja reniciar e/ou verificar lista de rodadas, da a possibilidade de retornar ao placar final.
+    while(loop=='l'){ //Condição para verificar a lista de rodadas.
         console.log(design('Jokempô','Speed',90).blue); //Gera desenho com o nome do jogo com fonte speed na cor azul.
         for(let j in choice[0]){
             console.log(`\nRodada ${Number(j)+1} - Computador ${options[0][choice[0][j]]} X ${options[0][choice[1][j]]} ${name} ${choice[2][j]}\n`); //Gera resumo de todas as rodadas jogadas.     
         }
-        if(stop=="pare"){
+        if(stop=="pare"){ //Condição que verifica se o usuário cancelou rodadas.
             console.log(`${name} CANCELOU ${rounds-i-1} RODADAS RESTANTES.\n`) // Demonstra quantas rodadas o usuário cancelou.
         }
-        loop=prompt("Digite 'R' para jogar novamente ou qualquer tecla para terminar: ").toLowerCase(); //Depois de mostrar a lista de rodadas pergunta novamente se deseja reiniciar.
+        loop=prompt("Digite 'R' para jogar novamente, 'V' para voltar ao placar final ou qualquer tecla para terminar: ").toLowerCase(); //Depois de mostrar a lista de rodadas pergunta novamente se deseja reiniciar.
+        if(loop=='v'){ //Condição para retornar para exibição do placar final.
+            finalScore(); //Exibe o placar final novamente, e pergunta se deseja reiniciar o jogo.
+        }
     }      
 }while(loop=='r');
