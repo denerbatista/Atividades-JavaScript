@@ -291,7 +291,7 @@ let metodo={
       this.removeAddOpcoes(this.atividades,' Construir abrigo ','construirabrigo',1);
       this.removeAddOpcoes(this.opcoesExplorar,' Local abrigo ','localabrigo',0);
     }else if(this.random=='mapa'){
-      console.log(`\nEncontrei o mapa agora sei onde será o ponto de resgate para ir no 21º dia.`.yellow);
+      console.log(`\nEncontrei o mapa agora sei onde será o ponto de resgate para ir no 7º dia.`.yellow);
       this.mapa=true;
       this.removeAddOpcoes(this.opcoesExplorar,' Mapa ','mapa',0);
     }else if(this.random=='banana'){
@@ -658,7 +658,7 @@ let usuario = {
 }
 let perguntas=[`São 6h do dia ${metodo.i+1} o que farei pela manhã: ${metodo.atividades[0]} ?`,`São 12h do dia ${metodo.i+1} o que farei pela tarde: ${metodo.atividades[0]} ? `,`Já está anoitecendo são 18h do dia ${metodo.i+1} o que farei: ${metodo.atividades[0]} ?`]
 console.clear()
-console.log(design('               Largados\n                             e\n                  Pelados',"Standard",'default','default',200))
+console.log(design('               Largado\n                             e\n                  Pelado',"Epic",'default','default',200))
 prompt('Tecle enter para continuar')
 metodo.escolhaItens()
   for(metodo.i=0;metodo.i<7;metodo.i++){
